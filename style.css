@@ -465,3 +465,96 @@ textarea::placeholder {
         font-size: 16px;
     }
 }
+
+.emoji {
+    font-size: 1.1em;
+    margin: 0 2px;
+}
+
+/* Melhorar a legibilidade das mensagens */
+.message-text {
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.message-text strong {
+    color: var(--primary-orange);
+}
+
+.message-text code {
+    background: var(--sidebar-hover);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+/* Estilos para a imagem do logo */
+.logo-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+    object-fit: cover;
+    margin-bottom: 16px;
+    /* border: 3px solid var(--primary-orange); */
+    /* filter: drop-shadow(0 4px 12px rgba(255, 107, 53, 0.3)); */
+    /* box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3); */
+    transition: all 0.3s ease;
+}
+
+.logo-image:hover {
+    transform: scale(1.05);
+    /* box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4); */
+    filter: drop-shadow(0 4px 12px rgba(255, 107, 53, 0.3));
+}
+
+/* Ajuste no empty-logo para a imagem */
+.empty-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.empty-logo h1 {
+    font-size: 32px;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0;
+}
+
+/* Emojis nas mensagens */
+.emoji {
+    font-size: 1.1em;
+    margin: 0 2px;
+}
+
+/* Melhorar a legibilidade das mensagens */
+.message-text {
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.message-text strong {
+    color: var(--primary-orange);
+}
+
+.message-text code {
+    background: var(--sidebar-hover);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+/* Avatar do bot com imagem potencial */
+.bot-message .message-avatar {
+    background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+    /* Se quiser usar imagem no avatar também:
+    background-image: url('bot-avatar.png');
+    background-size: cover;
+    */
+}

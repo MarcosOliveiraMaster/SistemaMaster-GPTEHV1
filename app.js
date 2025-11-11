@@ -121,7 +121,7 @@ class ChatApp {
             this.saveChat(message, response);
         } catch (error) {
             console.error('Erro:', error);
-            this.addMessage('Desculpe, ocorreu um erro ao processar sua solicitação: ' + error.message, 'bot');
+            this.addMessage('Olá! 😊 Parece que encontrei uma dificuldade técnica. Por favor, verifique se o Firebase e a API GROQ estão configurados corretamente. Se o problema persistir, entre em contato com o suporte.', 'bot');
         }
         
         this.hideTypingIndicator();
@@ -154,7 +154,7 @@ class ChatApp {
 
         console.log('Enviando para GROQ...');
         
-        // VOLTANDO PARA API TRADICIONAL (chat/completions)
+        // API tradicional (chat/completions)
         const response = await fetch(GROQ_API_URL, {
             method: 'POST',
             headers: {
@@ -162,7 +162,7 @@ class ChatApp {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: "llama-3.3-70b-versatile", // Modelo mais compatível
+                model: "llama-3.3-70b-versatile",
                 messages: [
                     {
                         role: "user",
@@ -170,7 +170,7 @@ class ChatApp {
                     }
                 ],
                 temperature: 0.3,
-                max_tokens: 2048, // CORRETO: max_tokens em vez de max_completion_tokens
+                max_tokens: 2048,
                 top_p: 1,
                 stream: false
             })
@@ -216,30 +216,92 @@ class ChatApp {
             return data;
         });
 
-        return `Você é o gpTEH, um assistente especializado em analisar dados de professores, clientes e candidatos.
+        return `Você é o gpTEH, um assistente especializado em analisar dados de professores, clientes e candidatos. Seja SEMPRE simpático, amigável e prestativo em todas as respostas.
 
-DADOS DISPONÍVEIS:
+🎯 GUIA COMPLETA DE BUSCA - gpTEH
 
-CADASTRO DE CLIENTES (Total: ${clientes.length} registros):
+COMO IDENTIFICAR E USAR CADA COLETA:
+
+1. 🏠 COLETA: cadastroClientes
+   USE PARA: Clientes, contratantes, estudantes, agendamentos, localização de aulas
+   CAMPOS-CHAVE:
+   - cep, cepAulas → Localização do cliente e das aulas
+   - cidadeUF, cidadeUFAulas → Cidade/Estado
+   - contato, email, cpf → Contato e identificação
+   - dataCadastro → Data de registro (ISO: "2025-11-08T23:02:32.649Z")
+   - estudantes → Array com: nome, escola, série, necessidades especiais, aniversario
+   - status → Status atual do cliente
+   - endereco, enderecoAulas → Endereços completos
+
+2. 📝 COLETA: candidatos
+   USE PARA: Candidatos a professores, processo seletivo, entrevistas
+   CAMPOS-CHAVE:
+   - nome, cpf, contato, email → Identificação
+   - dataEnvio, DataEntrevista → Datas do processo
+   - disciplinas → Matérias que pode ensinar
+   - expAulas, expNeuro, expTdics → Experiências (true/false)
+   - descricaoExpAulas, descricaoExpNeuro, descricaoTdics → Detalhes
+   - segManha, segTarde, terManha, etc. → Disponibilidade
+   - bairros → Locais preferidos para atuar
+   - status → Status do candidato
+   - comentariosAvaliador → Feedback da avaliação
+
+3. 👨‍🏫 COLETA: dataBaseProfessores
+   USE PARA: Professores ativos, especializações, disponibilidade
+   CAMPOS-CHAVE:
+   - nome, cpf, contato, email → Identificação
+   - area, disciplinas → Área de atuação e matérias
+   - nivel → Formação acadêmica
+   - expAulas, expNeuro, expTdics → Experiências
+   - descricaoExpAulas, descricaoExpNeuro, descricaoTdics → Detalhes
+   - segManha, segTarde, etc. → Disponibilidade
+   - bairros → Locais de atuação
+   - dataAtivacao → Data de aprovação
+   - pix → Para pagamentos
+
+🔍 ESTRATÉGIA DE BUSCA INTELIGENTE:
+
+1. IDENTIFIQUE pelo contexto:
+   - "cliente", "contratante", "estudante", "aula" → cadastroClientes
+   - "candidato", "processo seletivo", "entrevista" → candidatos  
+   - "professor", "docente", "ensino", "matéria" → dataBaseProfessores
+
+2. FORMATE datas ISO para formato legível (dd/mm/aaaa)
+
+3. PARA arrays (estudantes, disciplinas), liste item por item
+
+4. USE campos de localização para mapear regiões
+
+5. ANALISE disponibilidade pelos campos de dias/horários
+
+✨ ESTILO DE RESPOSTA:
+- Seja sempre amigável, simpático e entusiasmado 😊
+- Use emojis relevantes para tornar a resposta mais agradável
+- Cumprimente de forma calorosa
+- Mostre empatia e interesse genuíno em ajudar
+- Formate respostas de forma clara e organizada
+- Destaque informações importantes
+
+⚠️ REGRAS CRÍTICAS:
+- NUNCA invente informações não presentes nos dados
+- Se não encontrar algo, diga educadamente: "Não encontrei essa informação, mas posso ajudar com outras consultas! 😊"
+- Mantenha o tom positivo mesmo quando não encontrar dados
+- Priorize clareza e utilidade
+
+DADOS ATUAIS DISPONÍVEIS:
+
+🏠 CADASTRO CLIENTES (${clientes.length} registros):
 ${JSON.stringify(sampleClientes, null, 2)}
 
-CANDIDATOS (Total: ${candidatos.length} registros):
+📝 CANDIDATOS (${candidatos.length} registros):
 ${JSON.stringify(sampleCandidatos, null, 2)}
 
-PROFESSORES (Total: ${professores.length} registros):
+👨‍🏫 PROFESSORES (${professores.length} registros):
 ${JSON.stringify(sampleProfessores, null, 2)}
 
-INSTRUÇÕES CRÍTICAS:
-1. Responda APENAS com base nos dados fornecidos acima
-2. Se a informação não estiver nos dados, diga claramente "Não encontrei essa informação nos dados disponíveis"
-3. Seja direto, objetivo e útil
-4. Formate respostas de forma clara e organizada
-5. Use markdown básico para melhor legibilidade
-6. Não invente informações sob nenhuma circunstância
+PERGUNTA DO USUÁRIO: "${userMessage}"
 
-PERGUNTA DO USUÁRIO: ${userMessage}
-
-RESPONDA COM BASE NOS DADOS ACIMA:`;
+COM BASE NA GUIA ACIMA E NO SEU ESTILO AMIGÁVEL, ANALISE E RESPONDA:`;
     }
 
     async fetchCollection(collectionName) {
@@ -266,16 +328,57 @@ RESPONDA COM BASE NOS DADOS ACIMA:`;
         // Dados de exemplo para teste enquanto Firebase carrega
         const samples = {
             cadastroClientes: [
-                { nome: "Cliente Exemplo 1", email: "cliente1@exemplo.com", status: "ativo" },
-                { nome: "Cliente Exemplo 2", email: "cliente2@exemplo.com", status: "inativo" }
+                { 
+                    nome: "Cliente Exemplo 1", 
+                    email: "cliente1@exemplo.com", 
+                    status: "ativo",
+                    cidadeUF: "São Paulo/SP",
+                    estudantes: [
+                        { nome: "Estudante 1", escola: "Escola Municipal", serie: "5º ano" }
+                    ]
+                },
+                { 
+                    nome: "Cliente Exemplo 2", 
+                    email: "cliente2@exemplo.com", 
+                    status: "inativo",
+                    cidadeUF: "Rio de Janeiro/RJ"
+                }
             ],
             candidatos: [
-                { nome: "Candidato Exemplo 1", area: "TI", experiencia: "Júnior" },
-                { nome: "Candidato Exemplo 2", area: "Educação", experiencia: "Sênior" }
+                { 
+                    nome: "Candidato Exemplo 1", 
+                    area: "TI", 
+                    disciplinas: ["Matemática", "Física"],
+                    status: "em análise",
+                    segManha: true,
+                    segTarde: false
+                },
+                { 
+                    nome: "Candidato Exemplo 2", 
+                    area: "Educação", 
+                    disciplinas: ["Português", "História"],
+                    status: "aprovado",
+                    terManha: true,
+                    terTarde: true
+                }
             ],
             dataBaseProfessores: [
-                { nome: "Professor Exemplo 1", disciplina: "Matemática", nivel: "Superior" },
-                { nome: "Professor Exemplo 2", disciplina: "Português", nivel: "Médio" }
+                { 
+                    nome: "Professor Exemplo 1", 
+                    disciplina: "Matemática", 
+                    nivel: "Superior",
+                    area: "Exatas",
+                    segManha: true,
+                    quaTarde: true
+                },
+                { 
+                    nome: "Professor Exemplo 2", 
+                    disciplina: "Português", 
+                    nivel: "Mestrado",
+                    area: "Humanas",
+                    terManha: true,
+                    sexTarde: true
+                }
             ]
         };
         return samples[collectionName] || [];
@@ -302,7 +405,8 @@ RESPONDA COM BASE NOS DADOS ACIMA:`;
             .replace(/\n/g, '<br>')
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/\*(.*?)\*/g, '<em>$1</em>')
-            .replace(/`(.*?)`/g, '<code>$1</code>');
+            .replace(/`(.*?)`/g, '<code>$1</code>')
+            .replace(/(😊|🎯|🏠|📝|👨‍🏫|🔍|⚠️|✨)/g, '<span class="emoji">$1</span>');
     }
 
     saveChat(userMessage, botResponse) {
