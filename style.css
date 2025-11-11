@@ -1025,5 +1025,349 @@ textarea::placeholder {
     .welcome-message {
         font-size: 16px;
     }
->>>>>>> 6b99736b47df0ab67fe5ab40da3f6969a3ab7c67
+
+}
+
+/* Token Usage Bar Styles */
+.token-container {
+    background: var(--sidebar-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 12px 20px;
+    margin-bottom: 0;
+}
+
+.token-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.token-label {
+    font-weight: 600;
+}
+
+.token-count {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.token-percent {
+    color: var(--primary-orange);
+    font-weight: 600;
+}
+
+.token-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--border-color);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 6px;
+}
+
+.token-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-orange), var(--secondary-orange));
+    border-radius: 3px;
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+.token-limit {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-align: right;
+}
+
+/* Avatar com imagem */
+.message-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    flex-shrink: 0;
+    font-size: 14px;
+    overflow: hidden;
+    background: var(--medium-gray);
+}
+
+.bot-avatar {
+    background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+}
+
+.bot-avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-avatar {
+    background: linear-gradient(135deg, #666, #888);
+}
+
+/* Ajuste no empty-state para acomodar a barra de tokens */
+.empty-state {
+    padding-top: 40px;
+}
+
+/* Warning state para quando estiver perto do limite */
+.token-warning .token-progress {
+    background: linear-gradient(90deg, #ff4444, #ff6b35);
+    animation: pulse-warning 2s infinite;
+}
+
+@keyframes pulse-warning {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Request Container Styles */
+.request-container {
+    background: var(--sidebar-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    animation: slideInDown 0.5s ease-out;
+}
+
+.request-bar-wrapper {
+    flex: 1;
+    max-width: 200px;
+}
+
+.request-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.request-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-orange), var(--secondary-orange));
+    border-radius: 4px;
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+.request-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+}
+
+.request-label {
+    font-weight: 600;
+}
+
+.request-count {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.request-percent {
+    color: var(--primary-orange);
+    font-weight: 600;
+}
+
+.request-limit {
+    font-size: 10px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+/* Warning state para quando estiver perto do limite */
+.request-warning .request-progress {
+    background: linear-gradient(90deg, #ff4444, #ff6b35);
+    animation: pulse-warning 2s infinite;
+}
+
+@keyframes pulse-warning {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajustes para o main-content com a barra */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-bg);
+    position: relative;
+}
+
+.empty-state {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* Avatar com imagem */
+.message-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    flex-shrink: 0;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+.bot-avatar {
+    background: var(--medium-gray);
+}
+
+.bot-avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.user-avatar {
+    background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .request-container {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+        padding: 10px 15px;
+    }
+    
+    .request-bar-wrapper {
+        max-width: none;
+    }
+    
+    .request-info {
+        justify-content: center;
+    }
+    
+    .request-limit {
+        text-align: center;
+    }
+}
+
+/* Estilos existentes mantidos */
+.logo-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+    object-fit: cover;
+    margin-bottom: 16px;
+    border: 3px solid var(--primary-orange);
+    filter: drop-shadow(0 4px 12px rgba(255, 107, 53, 0.3));
+    transition: all 0.3s ease;
+}
+
+.logo-image:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 6px 20px rgba(255, 107, 53, 0.4));
+}
+
+.empty-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.empty-logo h1 {
+    font-size: 32px;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0;
+}
+
+/* Estilos específicos para o botão de enviar */
+.send-button {
+    background: var(--primary-orange);
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    margin-left: 12px;
+    flex-shrink: 0;
+    opacity: 1; /* CORREÇÃO: Sempre visível inicialmente */
+}
+
+.send-button:hover {
+    background: var(--secondary-orange);
+    transform: scale(1.05);
+}
+
+.send-button:active {
+    transform: scale(0.95);
+}
+
+.send-button:disabled {
+    background: var(--text-muted);
+    cursor: not-allowed;
+    transform: none;
+    opacity: 0.6; /* CORREÇÃO: Feedback visual quando desabilitado */
+}
+
+/* Garantir que o textarea tenha estilo consistente */
+textarea {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 15px;
+    resize: none;
+    max-height: 120px;
+    min-height: 24px;
+    line-height: 1.5;
+    font-family: inherit;
+    outline: none;
+}
+
+textarea::placeholder {
+    color: var(--text-muted);
 }
